@@ -10,27 +10,27 @@
 
 ---
 
-## Abstract
+This study examines how rule-based scoring and machine-learning approaches can help FlyRank content teams prioritize website pages showing signs of declining search performance. When websites contain large libraries of published content, teams need a practical way to decide which pages should receive attention first for human review and potential refresh.
 
-This study investigates whether rule-based scoring and machine-learning approaches can help identify website content showing signs of declining search performance. The objective is to support content teams in prioritizing pages for human review and potential refresh.
+Using an anonymized dataset of 30,000 content records from 32 clients, this experiment compares a Week 4 rule-based baseline with a Decision Tree classifier on a client-grouped held-out test set.
 
-The experiment uses an anonymized dataset containing 30,000 content records from 32 clients. A rule-based baseline is compared with a Decision Tree classifier using Precision@20 and Precision@50 on a client-grouped held-out test set.
+The rule-based baseline achieved Precision@20 of 0.60 and Precision@50 of 0.60, outperforming the Decision Tree, which achieved 0.45 and 0.56, respectively.
 
-The rule-based baseline achieved Precision@20 of 0.60 and Precision@50 of 0.60. The Decision Tree achieved 0.45 and 0.56, respectively. Therefore, the baseline performed better at both evaluation cutoffs in this experiment.
-
-The findings suggest that a simple rule-based approach can be a useful starting point for content prioritization. The model and its predictions should support human decision-making rather than automatically trigger content changes.
-
+The findings support retaining the transparent rule-based baseline as an initial content-prioritization method. Both approaches should support human decision-making rather than automatically trigger content changes, and observed decline should not be treated as proof that refreshing a page will improve its performance.
 ## 1. Research Question
 
-Can rule-based scoring and machine-learning models help identify website content that may be at risk of declining, so content teams can prioritize pages for human review and potential refresh?
+FlyRank works across the content lifecycle, including researching, writing, publishing and monitoring website content. Over time, pages that once attracted search visibility can lose rankings and clicks. When a website contains thousands of pages, content teams face a practical challenge: deciding which pages deserve attention first.
+
+This capstone examines that content-prioritization problem. A useful approach should help reviewers identify pages showing signs of decline without automatically changing or removing content.
 
 The study compares two approaches:
 
 - A rule-based scoring method developed as the Week 4 baseline.
 - A Decision Tree classifier trained to identify records with an observed declining trend.
 
-The main decision supported by this research is which approach should be used to prioritize content for further investigation.
+**Research question:** Can rule-based scoring and machine-learning models help identify website content that may be at risk of declining, so content teams can prioritize pages for human review and potential refresh?
 
+The main decision supported by this research is which approach should be used to prioritize content for further investigation. In this experiment, the rule-based baseline performed better than the Decision Tree on both reported precision metrics.
 ## 2. Dataset and Features
 
 The study uses the anonymized `content_refresh_anonymized.csv` dataset.
