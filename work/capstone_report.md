@@ -269,5 +269,4 @@ No blind or sealed holdout evaluation is claimed in this report.
 This project was completed as part of the FlyRank Machine Learning Internship.
 
 The analysis uses the anonymized dataset and learning resources supplied for the internship.
-
-**Built on the [FlyRank ML Internship dataset](https://flyrank.ai).**
+Built on the [FlyRank ML Internship dataset](https://flyrank.ai).
