@@ -42,7 +42,7 @@ The analysis uses the anonymized content dataset supplied for the FlyRank intern
 
 ### Feature selection
 
-The model uses these eight features:
+The model uses exactly these eight predictive features:
 
 1. `days_since_last_update`
 2. `impressions_90d`
@@ -52,6 +52,8 @@ The model uses these eight features:
 6. `content_age_days`
 7. `avg_position`
 8. `ctr`
+
+The target column, `decline_label`, is not included in the model features.
 
 ### Excluded information
 
@@ -113,7 +115,6 @@ A grouped split was created using `GroupShuffleSplit`.
 
 The grouped split keeps each client's records in only one partition, reducing the risk of evaluating the model on clients it has already seen.
 
-The decline rate was 0.550 in training and 0.517 in testing. Therefore, the test-set positive-class base rate was approximately 51.7%.
 
 ### Model versus baseline
 
@@ -183,7 +184,9 @@ The results are directional because the test set contains eight held-out clients
 
 ### Recommended approach
 
-Retain the Week 4 rule-based baseline as the stronger initial ranking method based on the current experiment.
+Retain the Week 4 rule-based baseline as the initial ranking method. It achieved stronger Precision@20 (0.60) and Precision@50 (0.60) than the Decision Tree, which scored 0.45 and 0.56, respectively.
+
+The results do not support replacing the baseline with the Decision Tree in this experiment.
 
 ### Suggested workflow
 
@@ -202,10 +205,9 @@ Important limitations include:
 - Only 32 clients are represented.
 - The held-out test group contains eight clients.
 - The target identifies observed decline, not the success of a content refresh.
-- The Decision Tree did not outperform the baseline.
+- The Decision Tree did not outperform the baseline at either ranking cutoff.
 - The results do not establish causal relationships.
 - Further validation across additional clients and time periods is needed.
-
 ## 8. Reproducibility
 
 ### Main experiment
@@ -226,19 +228,32 @@ The notebook contains the data checks, target definition, client-grouped split, 
 - Random state: 42
 - Model: `DecisionTreeClassifier(max_depth=3, min_samples_leaf=100, random_state=42)`
 
-### Environment setup
+### Fresh repository setup
 
-From the repository root, install the project dependencies:
+Clone the public repository and move into its root directory:
+
+```bash
+git clone https://github.com/sahanabytes/machine-learning-portfolio.git
+cd machine-learning-portfolio
+```
+
+Install the project dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-For the capstone notebook in Google Colab, the notebook setup also uses:
+### Running the capstone experiment
+
+Open `work/notebooks/w05_model.ipynb` in Google Colab and run all cells from top to bottom.
+
+The notebook setup also uses:
 
 ```python
 %pip install -q duckdb huggingface_hub pandas scikit-learn matplotlib
 ```
+
+Before running the experiment, ensure that the anonymized dataset is available at the documented path.
 
 ### Reference pipeline
 
@@ -260,10 +275,9 @@ A fresh execution should confirm:
 - The eight model features match the documented feature list.
 - The reported metrics match a fresh notebook execution.
 
-The experiment uses random state 42 for reproducibility. Exact package versions should be recorded when the final environment is verified.
+The experiment uses random state 42 for reproducibility. Project dependencies are listed in `requirements.txt` as minimum supported versions rather than a fully locked environment, so exact results may vary slightly across software environments.
 
 No blind or sealed holdout evaluation is claimed in this report.
-
 ## 9. Acknowledgments and Data Credit
 
 This project was completed as part of the FlyRank Machine Learning Internship.
